@@ -335,14 +335,4 @@ Possible future enhancements include:
 
 ---
 
-# Author
 
-Pushplata
-
-Aspiring Data Analyst / BI Developer skilled in SQL, Python, data analytics, customer review sentiment analysis, and business intelligence workflows.
-
----
-
-# License
-
-This project is created for educational, portfolio, and resume purposes.
