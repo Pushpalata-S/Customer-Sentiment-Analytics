@@ -1,3 +1,4 @@
+
 # Customer Sentiment Analytics
 
 SQL Server • Python • Customer Review Sentiment Analysis using Python and NLTK VADER • Data Analytics
@@ -318,6 +319,9 @@ inside:
 ```text
 data/processed/
 ```
+
+<img width="866" height="708" alt="Screenshot 2026-08-25 205449" src="https://github.com/user-attachments/assets/f5a21be5-9906-4eb5-99ff-abaf290cc73d" />
+
 
 <img width="1333" height="752" alt="Screenshot 2026-08-25 204441" src="https://github.com/user-attachments/assets/fb8a4a1d-2527-4401-bbf7-a852bfbaea23" />
 
