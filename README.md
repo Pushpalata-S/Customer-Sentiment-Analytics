@@ -673,6 +673,12 @@ DAX
 
 creates a complete business intelligence workflow.
 
+<img width="866" height="708" alt="Screenshot 2026-08-25 205449" src="https://github.com/user-attachments/assets/f5a21be5-9906-4eb5-99ff-abaf290cc73d" /> 
+<img width="1333" height="752" alt="Screenshot 2026-08-25 204441" src="https://github.com/user-attachments/assets/fb8a4a1d-2527-4401-bbf7-a852bfbaea23" /> 
+<img width="1325" height="746" alt="Screenshot 2026-08-25 204807" src="https://github.com/user-attachments/assets/99c41f4b-4038-43e2-8238-3ebe5c70a713" /> 
+<img width="1317" height="740" alt="Screenshot 2026-08-25 204818" src="https://github.com/user-attachments/assets/73e66988-75c4-4ff5-8da1-0c454a10fcc9" /> 
+<img width="1318" height="732" alt="Screenshot 2026-08-25 204842" src="https://github.com/user-attachments/assets/edd5d1d8-1652-4664-adff-979861cd4d6b" />
+
 ---
 
 # 📊 Dashboard Analysis
