@@ -1,42 +1,75 @@
 # 📊 Customer Sentiment Analytics
 
-**SQL Server • Python • NLTK VADER • Advanced SQL • Power BI • DAX • Customer Sentiment Analysis**
+### An End-to-End SQL + Python (NLP) + Power BI Business Intelligence Project
 
-An end-to-end customer analytics project that transforms raw customer, product, engagement, journey, and review data into structured business insights using **SQL Server, Python NLP, advanced SQL analytics, and Power BI**.
+![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=flat&logo=microsoft-sql-server&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white)
+![NLTK](https://img.shields.io/badge/NLTK-VADER-4B8BBE?style=flat)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?style=flat&logo=powerbi&logoColor=black)
+![DAX](https://img.shields.io/badge/DAX-Measures-orange?style=flat)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat)
+
+*Transforming raw customer, product, engagement, journey, and review data into structured, decision-ready business insights.*
+
+</div>
 
 ---
 
-# 📌 Project Overview
+## 📌 Table of Contents
 
-Customer reviews contain valuable information about customer experience, but raw review text and ratings alone are difficult to analyze at scale.
+- [Project Overview](#-project-overview)
+- [Workflow](#-end-to-end-project-workflow)
+- [Business Problem](#-business-problem)
+- [Project Objectives](#-project-objectives)
+- [Dataset](#-dataset)
+- [Data Model](#️-data-model)
+- [Data Cleaning & Validation](#-data-cleaning--validation)
+- [Python Data Processing](#-python-data-processing)
+- [Sentiment Analysis](#-sentiment-analysis)
+- [SQL Server Analytical Layer](#️-sql-server-analytical-layer)
+- [Advanced SQL Analytics](#-advanced-sql-analytics)
+- [Rating vs Sentiment Analysis](#-rating-vs-sentiment-analysis)
+- [Power BI Dashboard](#-power-bi-dashboard)
+- [KPIs & DAX](#-power-bi-kpis)
+- [Technologies Used](#️-technologies-used)
+- [Project Structure](#-project-structure)
+- [How to Run](#️-how-to-run-the-project)
+- [Security](#-security)
+- [Key Concepts Demonstrated](#-key-concepts-demonstrated)
+- [What I Learned](#-what-i-learned)
+- [Key Highlights](#-key-project-highlights)
+- [Future Improvements](#-future-improvements)
+- [Conclusion](#-conclusion)
+- [Author](#-author)
 
-This project builds an end-to-end analytics pipeline that:
+---
 
-- Stores and structures raw business data in SQL Server
+## 📌 Project Overview
+
+Customer reviews contain valuable information about customer experience, but raw review text and star ratings alone are difficult to analyze at scale.
+
+This project builds a complete analytics pipeline — from raw data to boardroom-ready dashboard — that:
+
+- Stores and structures raw business data in **SQL Server**
 - Cleans and validates the data
-- Creates fact and dimension tables
-- Extracts customer reviews using Python
-- Performs sentiment analysis using NLTK VADER
-- Enriches customer review data with sentiment information
-- Stores the enriched data back into SQL Server
-- Performs advanced SQL analysis
-- Creates a Power BI-ready analytical view
-- Builds KPIs and analytical measures using DAX
-- Presents the final insights through an interactive Power BI dashboard
+- Designs a **fact and dimension model**
+- Extracts customer reviews using **Python**
+- Performs sentiment analysis using **NLTK VADER**
+- Enriches customer reviews with sentiment scores
+- Writes the enriched data back into SQL Server
+- Runs **advanced SQL analytics** (CTEs, window functions, views)
+- Builds a **Power BI-ready analytical view**
+- Creates KPIs and analytical measures using **DAX**
+- Presents insights through an **interactive Power BI dashboard**
 
-The project focuses on answering business questions related to:
+The project answers business questions related to customer satisfaction, product performance, sentiment trends, rating-vs-sentiment mismatches, customer engagement, review activity, and customer journey behavior.
 
-- Customer satisfaction
-- Product performance
-- Customer sentiment
-- Rating vs sentiment mismatch
-- Customer engagement
-- Customer review activity
-- Customer journey behavior
+> **Why it matters:** this isn't a single-tool exercise — it demonstrates how SQL, Python/NLP, and Power BI work together as one connected analytics pipeline, from raw CSVs to an executive dashboard.
 
 ---
 
-# 🔄 End-to-End Project Workflow
+## 🔄 End-to-End Project Workflow
 
 ```text
 Raw CSV Data
@@ -70,29 +103,22 @@ Business Insights
 
 ---
 
-# 🎯 Business Problem
+## 🎯 Business Problem
 
-Businesses collect large amounts of customer feedback through reviews, ratings, engagement activities, and customer journeys.
-
-However, raw data does not directly answer important business questions.
-
-The project addresses questions such as:
+Businesses collect large volumes of customer feedback through reviews, ratings, engagement activity, and customer journeys — but raw data doesn't directly answer the questions that matter:
 
 - What percentage of customer reviews are positive, neutral, or negative?
-- Which products receive the highest customer satisfaction?
-- Which products receive poor customer feedback?
-- Which customers are highly active in providing reviews?
+- Which products receive the highest / lowest customer satisfaction?
+- Which customers are most active in providing reviews?
 - How do textual sentiments compare with numerical ratings?
-- Are there customers giving high ratings while expressing negative sentiment?
-- How does customer engagement relate to customer feedback?
+- Are customers giving high ratings while expressing negative sentiment?
+- How does customer engagement relate to feedback?
 - How does customer sentiment change over time?
-- Which areas may require business improvement?
+- Which areas need business improvement?
 
 ---
 
-# 🎯 Project Objectives
-
-The main objectives of the project are:
+## 🎯 Project Objectives
 
 - Load raw business data into SQL Server
 - Clean and validate source data
@@ -105,54 +131,45 @@ The main objectives of the project are:
 - Perform advanced SQL analytics
 - Create reusable analytical SQL views
 - Prepare data for Power BI
-- Create DAX-based KPIs
+- Build DAX-based KPIs
 - Build an interactive customer sentiment dashboard
-- Convert analytical results into business insights
+- Convert analytical results into actionable business insights
 
 ---
 
-# 📂 Dataset
+## 📂 Dataset
 
 The project uses multiple datasets related to customers, products, reviews, engagement, geography, and customer journeys.
 
-### Main Source Tables
-
 | Table | Description |
 |---|---|
-| customer_reviews | Customer review text and ratings |
-| customers | Customer demographic and profile information |
-| products | Product information |
-| customer_journey | Customer interaction and journey information |
-| engagement_data | Customer engagement metrics |
-| geography | Geographic information |
+| `customer_reviews` | Customer review text and ratings |
+| `customers` | Customer demographic and profile information |
+| `products` | Product information |
+| `customer_journey` | Customer interaction and journey information |
+| `engagement_data` | Customer engagement metrics |
+| `geography` | Geographic information |
 
 ---
 
-# 🏗️ Data Model
+## 🏗️ Data Model
 
-To make the data easier to analyze, the raw data was transformed into a structured fact and dimension model.
+The raw data was transformed into a structured **fact and dimension model** for efficient, scalable analysis.
 
-### Dimension Tables
-- dim_customers
-- dim_products
+**Dimension Tables**
+- `dim_customers`
+- `dim_products`
 
-These tables contain descriptive information about customers and products.
+**Fact Tables**
+- `fact_customer_reviews`
+- `fact_customer_journey`
+- `fact_engagement_data`
+- `fact_review_sentiment`
 
-### Fact Tables
-- fact_customer_reviews
-- fact_customer_journey
-- fact_engagement_data
-- fact_review_sentiment
-
-These tables contain measurable business events and analytical information.
-
----
-
-# 🧩 Fact & Dimension Architecture
+### Fact & Dimension Architecture
 
 ```text
                     dim_customers
-                         |
                          |
                          ↓
                   fact_customer_reviews
@@ -160,10 +177,8 @@ These tables contain measurable business events and analytical information.
                          ↓
                   fact_review_sentiment
                          |
-                         |
-dim_products -----------+
-                         
-                         
+dim_products ------------+
+
 fact_customer_journey
 
 fact_engagement_data
@@ -173,11 +188,9 @@ The model separates descriptive attributes from transactional/analytical data, m
 
 ---
 
-# 🧹 Data Cleaning & Validation
+## 🧹 Data Cleaning & Validation
 
-Before analysis, the raw data was processed and validated.
-
-The workflow included:
+Before analysis, the raw data was processed and validated:
 
 - Checking duplicate records
 - Validating missing values
@@ -188,45 +201,28 @@ The workflow included:
 - Preparing review text for NLP processing
 - Structuring the data into fact and dimension tables
 
-This ensured that the analytical layer was based on consistent and reliable data.
+This ensured the analytical layer was built on consistent, reliable data.
 
 ---
 
-# 🐍 Python Data Processing
+## 🐍 Python Data Processing
 
-Python was used as the bridge between SQL Server and the sentiment-analysis pipeline.
-
-The Python script:
+Python bridges SQL Server and the sentiment-analysis pipeline via:
 
 ```
 python/customer_reviews_enrichment.py
 ```
 
-performs the following operations:
-
 ```text
-SQL Server
-    ↓
-Extract Customer Reviews
-    ↓
-Pandas DataFrame
-    ↓
-Text Processing
-    ↓
-VADER Sentiment Analysis
-    ↓
-Sentiment Classification
-    ↓
-Enriched Review Data
-    ↓
-SQL Server
+SQL Server → Extract Customer Reviews → Pandas DataFrame → Text Processing
+    → VADER Sentiment Analysis → Sentiment Classification → Enriched Review Data → SQL Server
 ```
 
 ---
 
-# 🧠 Sentiment Analysis
+## 🧠 Sentiment Analysis
 
-Customer review text was analyzed using VADER (Valence Aware Dictionary and sEntiment Reasoner) from the NLTK library.
+Customer review text was analyzed using **VADER** (Valence Aware Dictionary and sEntiment Reasoner) from the NLTK library.
 
 VADER produces a compound sentiment score ranging from approximately:
 
@@ -236,18 +232,14 @@ VADER produces a compound sentiment score ranging from approximately:
 +1  ← Positive
 ```
 
-The sentiment score is then converted into meaningful sentiment categories.
-
-### 📊 Sentiment Fields
-
-The enriched review data contains sentiment-related fields such as:
+### Sentiment Fields
 
 | Field | Description |
 |---|---|
-| SentimentScore | Numerical VADER sentiment score |
-| TextSentimentLabel | Original text sentiment classification |
-| SentimentCategory | Business-oriented sentiment category |
-| SentimentBucket | Grouped sentiment score range |
+| `SentimentScore` | Numerical VADER sentiment score |
+| `TextSentimentLabel` | Original text sentiment classification |
+| `SentimentCategory` | Business-oriented sentiment category |
+| `SentimentBucket` | Grouped sentiment score range |
 
 **Example:**
 
@@ -257,141 +249,46 @@ The enriched review data contains sentiment-related fields such as:
 | Average experience | 0.00 | Neutral |
 | Product did not meet expectations | -0.45 | Negative |
 
----
+### Sentiment Enrichment Pipeline
 
-# 🔗 Sentiment Enrichment Pipeline
-
-The original customer review data contains information such as:
-
-- ReviewID
-- CustomerID
-- ProductID
-- ReviewDate
-- Rating
-- ReviewText
-
-Python enriches this information by adding:
-
-- SentimentScore
-- TextSentimentLabel
-- SentimentCategory
-- SentimentBucket
-
-This creates a richer analytical dataset that combines:
-
-```text
-Numerical Feedback
-        +
-Textual Feedback
-        ↓
-Customer Sentiment Analysis
-```
+Original data (`ReviewID`, `CustomerID`, `ProductID`, `ReviewDate`, `Rating`, `ReviewText`) is enriched with `SentimentScore`, `TextSentimentLabel`, `SentimentCategory`, and `SentimentBucket` — combining numerical feedback with textual feedback into one unified sentiment analysis layer.
 
 ---
 
-# 🗄️ SQL Server Analytical Layer
+## 🗄️ SQL Server Analytical Layer
 
-After sentiment analysis, the enriched review information is incorporated into the SQL Server analytical layer.
+The enriched review data feeds into the SQL Server analytical layer, joining customer, product, review, engagement, and sentiment information across:
 
-The project contains dedicated fact and dimension tables for analytical querying.
-
-Important analytical tables include:
-
-- dim_customers
-- dim_products
-- fact_customer_reviews
-- fact_customer_journey
-- fact_engagement_data
-- fact_review_sentiment
-
-This allows customer, product, review, engagement, and sentiment information to be analyzed together.
+`dim_customers` · `dim_products` · `fact_customer_reviews` · `fact_customer_journey` · `fact_engagement_data` · `fact_review_sentiment`
 
 ---
 
-# 🧮 Advanced SQL Analytics
+## 🧮 Advanced SQL Analytics
 
-The project was expanded beyond basic SQL queries to include advanced analytical SQL.
+The project goes beyond basic queries into advanced analytical SQL:
 
-Techniques used include:
-
-- CTEs
-- JOINs
-- LEFT JOINs
-- GROUP BY
-- Conditional Aggregation
-- CASE expressions
-- NULLIF
-- Window Functions
-  - RANK
-  - DENSE_RANK
-  - ROW_NUMBER
-  - PERCENT_RANK
-  - SUM() OVER()
+- CTEs, JOINs, LEFT JOINs, GROUP BY
+- Conditional Aggregation, CASE expressions, NULLIF
+- **Window Functions:** `RANK()`, `DENSE_RANK()`, `ROW_NUMBER()`, `PERCENT_RANK()`, `SUM() OVER()`
 - Cumulative calculations
 - SQL Views
 - Analytical percentages
 
----
+### 👥 Customer-Level Performance
 
-# 👥 Customer-Level Performance Analysis
+Total reviews · products reviewed · average rating · positive/negative reviews · positive review % · review activity percentile — used to identify highly active reviewers.
 
-Customer performance is analyzed using metrics such as:
+### 📦 Product Performance
 
-- Total reviews
-- Products reviewed
-- Average rating
-- Positive reviews
-- Negative reviews
-- Positive review percentage
-- Review activity percentile
+Total reviews · unique customers · average rating · positive/negative review % — used to identify high- and under-performing products.
 
-The analysis helps identify customers who are highly active in providing feedback.
-
----
-
-# 📦 Product Performance Analysis
-
-Products are evaluated using:
-
-- Total reviews
-- Unique customers
-- Average rating
-- Positive reviews
-- Negative reviews
-- Positive review percentage
-- Negative review percentage
-
-This helps identify high-performing and underperforming products.
-
----
-
-# 🏆 Product Ranking
-
-Products are ranked using multiple SQL window functions.
-
-### RANK()
+### 🏆 Product Ranking
 
 ```sql
-RANK() OVER (
-    ORDER BY AverageRating DESC
-) AS RatingRank
+RANK() OVER (ORDER BY AverageRating DESC) AS RatingRank
+DENSE_RANK() OVER (ORDER BY AverageRating DESC) AS DenseRatingRank
+ROW_NUMBER() OVER (ORDER BY AverageRating DESC, TotalReviews DESC) AS ProductRowNumber
 ```
-
-Ranks products according to average customer rating.
-
-When two products have the same rating, they receive the same rank.
-
-### DENSE_RANK()
-
-```sql
-DENSE_RANK() OVER (
-    ORDER BY AverageRating DESC
-) AS DenseRatingRank
-```
-
-Similar to RANK(), but does not leave gaps after tied rankings.
-
-**Example:**
 
 | Rating | RANK | DENSE_RANK |
 |---|---|---|
@@ -400,46 +297,17 @@ Similar to RANK(), but does not leave gaps after tied rankings.
 | 4.8 | 2 | 2 |
 | 4.7 | 4 | 3 |
 
-### ROW_NUMBER()
+`RANK()` leaves gaps after ties; `DENSE_RANK()` does not; `ROW_NUMBER()` breaks ties using `TotalReviews` as a secondary sort.
+
+### 📈 Review Activity Percentile
 
 ```sql
-ROW_NUMBER() OVER (
-    ORDER BY AverageRating DESC, TotalReviews DESC
-) AS ProductRowNumber
+PERCENT_RANK() OVER (ORDER BY TotalReviews) AS ReviewActivityPercentile
 ```
 
-Assigns a unique sequential number to every product.
+A value closer to `0` = lower relative activity; closer to `1` = higher relative activity.
 
-The secondary sorting condition of TotalReviews helps break ties between products with the same rating.
-
----
-
-# 📈 Customer Review Activity Percentile
-
-Customer review activity is analyzed using:
-
-```sql
-PERCENT_RANK() OVER (
-    ORDER BY TotalReviews
-) AS ReviewActivityPercentile
-```
-
-This calculates the relative position of a customer based on their total review activity.
-
-A value closer to `0` represents a lower relative position, while a value closer to `1` represents a higher relative position.
-
----
-
-# 📊 Rating Distribution Analysis
-
-Customer ratings are analyzed using:
-
-- Review count
-- Rating percentage
-- Cumulative review count
-- Cumulative percentage
-
-A cumulative calculation is created using:
+### 📊 Rating Distribution & Cumulative Analysis
 
 ```sql
 SUM(ReviewCount) OVER (
@@ -448,289 +316,112 @@ SUM(ReviewCount) OVER (
 )
 ```
 
-This helps understand how reviews accumulate across different rating levels.
-
----
-
-# 🪟 SQL Window Functions
-
-The project uses the following window functions:
+Used to compute review count, rating %, cumulative review count, and cumulative % across rating levels.
 
 | Function | Purpose |
 |---|---|
-| RANK() | Product ranking |
-| DENSE_RANK() | Ranking without gaps |
-| ROW_NUMBER() | Unique product ordering |
-| PERCENT_RANK() | Relative customer review activity |
-| SUM() OVER() | Cumulative review analysis |
-
-These functions demonstrate advanced analytical SQL capabilities beyond simple aggregation.
+| `RANK()` | Product ranking |
+| `DENSE_RANK()` | Ranking without gaps |
+| `ROW_NUMBER()` | Unique product ordering |
+| `PERCENT_RANK()` | Relative customer review activity |
+| `SUM() OVER()` | Cumulative review analysis |
 
 ---
 
-# 🔗 Power BI Analytical View
+## 🔗 Power BI Analytical View
 
-A dedicated SQL Server view was created for Power BI:
+A dedicated SQL Server view — `vw_powerbi_customer_sentiment` — combines review, customer, product, rating, and sentiment data into one clean, analysis-ready dataset, generating business-friendly fields:
 
-```
-vw_powerbi_customer_sentiment
-```
+`ReviewYear` · `ReviewMonth` · `ReviewMonthName` · `ReviewMonthStart` · `AgeGroup` · `RatingGroup` · `RatingSentimentStatus` · `NegativeReviewFlag` · `PositiveReviewFlag` · `ReviewCount`
 
-The view creates a clean, analysis-ready dataset by combining review, customer, product, rating, and sentiment information.
+This centralizes business logic in SQL Server and reduces repetitive transformations inside Power BI.
 
-It also generates business-friendly analytical fields such as:
+**Time-based analysis** (year/month/month name/month start) enables tracking of monthly review volume, rating trends, sentiment trends, and changes in satisfaction over time.
 
-- ReviewYear
-- ReviewMonth
-- ReviewMonthName
-- ReviewMonthStart
-- AgeGroup
-- RatingGroup
-- RatingSentimentStatus
-- NegativeReviewFlag
-- PositiveReviewFlag
-- ReviewCount
-
-This reduces repetitive transformations inside Power BI and centralizes important business logic in SQL Server.
+**Customer segmentation** groups customers by age (`Under 25`, `25-34`, `35-44`, `45-54`, `55+`) so satisfaction and sentiment can be compared across segments.
 
 ---
 
-# 📅 Time-Based Analysis
+## ⭐ Rating vs Sentiment Analysis
 
-Review dates are transformed into analytical attributes:
-
-- ReviewYear
-- ReviewMonth
-- ReviewMonthName
-- ReviewMonthStart
-
-These fields allow analysis of:
-
-- Monthly review volume
-- Rating trends
-- Sentiment trends
-- Customer feedback trends
-- Changes in customer satisfaction over time
-
----
-
-# 👥 Customer Segmentation
-
-Customer age is converted into business-friendly groups:
-
-- Under 25
-- 25-34
-- 35-44
-- 45-54
-- 55+
-
-This allows customer satisfaction and sentiment to be compared across different customer segments.
-
----
-
-# ⭐ Rating vs Sentiment Analysis
-
-One of the key improvements in the project is the comparison between:
+A key differentiator of this project: comparing **numerical ratings** against **textual sentiment** to surface mismatches a star rating alone would hide.
 
 ```text
-Customer Rating
-        +
-Textual Sentiment
+Rating ≥ 4 + Negative Sentiment  →  Potential Hidden Customer Issue
+Rating ≤ 2 + Positive Sentiment  →  Potential Rating/Text Mismatch
 ```
 
-A customer may give a high numerical rating while expressing negative sentiment in the review text.
+A derived field, `RatingSentimentStatus`, classifies each review as:
 
-The project identifies these potential mismatches.
+- **Negative Sentiment – High Rating**
+- **Positive Sentiment – Low Rating**
+- **Aligned**
 
-### High Rating + Negative Sentiment
-
-```text
-Rating >= 4
-      +
-Negative Sentiment
-      ↓
-Potential Hidden Customer Issue
-```
-
-### Low Rating + Positive Sentiment
-
-```text
-Rating <= 2
-      +
-Positive Sentiment
-      ↓
-Potential Rating/Text Mismatch
-```
-
-### Rating-Sentiment Status
-
-A derived field:
-
-```
-RatingSentimentStatus
-```
-
-is used to classify these situations.
-
-Possible categories include:
-
-- Negative Sentiment - High Rating
-- Positive Sentiment - Low Rating
-- Aligned
-
-This provides deeper customer experience analysis than using star ratings alone.
+Two binary flags — `NegativeReviewFlag` and `PositiveReviewFlag` — make filtering and KPI calculations easier in Power BI.
 
 ---
 
-# 🚩 Review Flags
+## 📊 Power BI Dashboard
 
-The analytical view also creates binary indicators:
+The final Power BI dashboard unifies the SQL and Python outputs into one interactive analytical interface covering customer satisfaction, sentiment, product performance, review activity, rating distribution, sentiment trends, segmentation, rating-vs-sentiment analysis, engagement, and customer journey.
 
-- NegativeReviewFlag
-- PositiveReviewFlag
+<p align="center">
+<img width="866" alt="Dashboard overview" src="https://github.com/user-attachments/assets/f5a21be5-9906-4eb5-99ff-abaf290cc73d" />
+<br/>
+<img width="1333" alt="Sentiment analysis view" src="https://github.com/user-attachments/assets/fb8a4a1d-2527-4401-bbf7-a852bfbaea23" />
+<br/>
+<img width="1325" alt="Product performance view" src="https://github.com/user-attachments/assets/99c41f4b-4038-43e2-8238-3ebe5c70a713" />
+<br/>
+<img width="1317" alt="Customer analysis view" src="https://github.com/user-attachments/assets/73e66988-75c4-4ff5-8da1-0c454a10fcc9" />
+<br/>
+<img width="1318" alt="Rating vs sentiment view" src="https://github.com/user-attachments/assets/edd5d1d8-1652-4664-adff-979861cd4d6b" />
+</p>
 
-Example:
+The dashboard supports drill-down from high-level KPIs into detail:
 
 ```text
-Negative Sentiment
-        ↓
-NegativeReviewFlag = 1
+Overall Customer Satisfaction → Product Performance → Individual Reviews → Sentiment → Potential Customer Issue
 ```
-
-```text
-Positive Sentiment
-        ↓
-PositiveReviewFlag = 1
-```
-
-These flags make filtering and KPI calculations easier in Power BI.
 
 ---
 
-# 📊 Power BI Dashboard
-
-The final Power BI dashboard brings together the SQL and Python outputs into an interactive analytical interface.
-
-The dashboard focuses on:
-
-- Customer satisfaction
-- Customer sentiment
-- Product performance
-- Review activity
-- Rating distribution
-- Sentiment trends
-- Customer segmentation
-- Rating vs sentiment analysis
-- Customer engagement
-- Customer journey
-
----
-
-# 🎯 Power BI KPIs
-
-The dashboard can be used to monitor important metrics such as:
+## 🎯 Power BI KPIs
 
 | KPI | Description |
 |---|---|
 | Total Reviews | Total customer reviews |
 | Average Rating | Average star rating |
-| Positive Reviews | Number of positive reviews |
-| Negative Reviews | Number of negative reviews |
-| Positive Sentiment % | Percentage of positive reviews |
-| Negative Sentiment % | Percentage of negative reviews |
-| Neutral Sentiment % | Percentage of neutral reviews |
-| Average Sentiment Score | Average sentiment score |
+| Positive / Negative Reviews | Count of positive / negative reviews |
+| Positive / Negative / Neutral Sentiment % | Share of each sentiment class |
+| Average Sentiment Score | Average VADER sentiment score |
 | Products Reviewed | Number of products receiving reviews |
 | Active Customers | Customers contributing reviews |
 
----
+### 🧮 DAX
 
-# 🧮 DAX
-
-DAX is used in Power BI to create analytical measures and KPIs.
-
-The DAX layer is used to support:
-
-- Review metrics
-- Customer metrics
-- Sentiment analysis
-- Percentage calculations
-- Dashboard KPIs
-
-The combination of:
+DAX measures power the review metrics, customer metrics, sentiment analysis, percentage calculations, and dashboard KPIs, completing the pipeline:
 
 ```text
-SQL Server
-      ↓
-Python
-      ↓
-SQL Analytical Layer
-      ↓
-Power BI
-      ↓
-DAX
+SQL Server → Python → SQL Analytical Layer → Power BI → DAX
 ```
 
-creates a complete business intelligence workflow.
+---
 
-<img width="866" height="708" alt="Screenshot 2026-08-25 205449" src="https://github.com/user-attachments/assets/f5a21be5-9906-4eb5-99ff-abaf290cc73d" /> 
-<img width="1333" height="752" alt="Screenshot 2026-08-25 204441" src="https://github.com/user-attachments/assets/fb8a4a1d-2527-4401-bbf7-a852bfbaea23" /> 
-<img width="1325" height="746" alt="Screenshot 2026-08-25 204807" src="https://github.com/user-attachments/assets/99c41f4b-4038-43e2-8238-3ebe5c70a713" /> 
-<img width="1317" height="740" alt="Screenshot 2026-08-25 204818" src="https://github.com/user-attachments/assets/73e66988-75c4-4ff5-8da1-0c454a10fcc9" /> 
-<img width="1318" height="732" alt="Screenshot 2026-08-25 204842" src="https://github.com/user-attachments/assets/edd5d1d8-1652-4664-adff-979861cd4d6b" />
+## 💡 Business Insights Enabled
+
+| Area | Insight |
+|---|---|
+| **Customer Satisfaction** | Overall customer experience from ratings + sentiment |
+| **Product Performance** | Products with consistently high or low feedback |
+| **Negative Feedback** | Products and customers linked to negative reviews |
+| **Rating-Sentiment Mismatch** | Cases where ratings and text tell different stories |
+| **Customer Engagement** | Engagement and interaction behavior |
+| **Customer Journey** | Patterns and potential drop-off points |
+| **Sentiment Trends** | How customer sentiment shifts over time |
 
 ---
 
-# 📊 Dashboard Analysis
-
-The dashboard allows users to move from high-level KPIs into detailed analysis.
-
-For example:
-
-```text
-Overall Customer Satisfaction
-          ↓
-Product Performance
-          ↓
-Individual Reviews
-          ↓
-Sentiment
-          ↓
-Potential Customer Issue
-```
-
-This makes the dashboard useful for both high-level business monitoring and detailed investigation.
-
----
-
-# 💡 Business Insights Enabled
-
-The project enables businesses to identify:
-
-**Customer Satisfaction**
-Understand the overall customer experience using ratings and sentiment.
-
-**Product Performance**
-Identify products receiving consistently high or low customer feedback.
-
-**Negative Feedback**
-Identify products and customers associated with negative reviews.
-
-**Rating-Sentiment Mismatch**
-Identify cases where numerical ratings and textual feedback tell different stories.
-
-**Customer Engagement**
-Analyze customer engagement and interaction behavior.
-
-**Customer Journey**
-Identify patterns and potential drop-off points in customer interactions.
-
-**Sentiment Trends**
-Track how customer sentiment changes over time.
-
----
-
-# 🛠️ Technologies Used
+## 🛠️ Technologies Used
 
 | Technology | Purpose |
 |---|---|
@@ -738,19 +429,18 @@ Track how customer sentiment changes over time.
 | SSMS | SQL development and database management |
 | Python | Data processing and sentiment analysis |
 | Pandas | Data manipulation |
-| NLTK | Natural Language Processing |
+| NLTK | Natural language processing |
 | VADER | Sentiment analysis |
-| PyODBC | Python-SQL Server connectivity |
+| PyODBC | Python–SQL Server connectivity |
 | SQLAlchemy | Database connectivity support |
 | Power BI | Data visualization and dashboarding |
 | DAX | KPI and analytical calculations |
-| Git | Version control |
-| GitHub | Project hosting |
+| Git / GitHub | Version control and project hosting |
 | VS Code | Development environment |
 
 ---
 
-# 📁 Project Structure
+## 📁 Project Structure
 
 ```text
 Customer-Sentiment-Analytics/
@@ -799,169 +489,81 @@ Customer-Sentiment-Analytics/
 └── .gitignore
 ```
 
-> **Note:** File names in the structure should match the actual files present in the repository.
+> 💡 Before publishing, double-check that every file listed above actually exists in your repository (and rename/remove entries on either side if they've drifted) — an accurate structure section builds trust with anyone reviewing the project, including recruiters.
 
 ---
 
-# ▶️ How to Run the Project
+## ▶️ How to Run the Project
 
-### Step 1 — Clone the Repository
+**1. Clone the repository**
 
 ```bash
 git clone https://github.com/Pushpalata-S/Customer-Sentiment-Analytics.git
 cd Customer-Sentiment-Analytics
 ```
 
-### Step 2 — Set Up SQL Server
+**2. Set up SQL Server**
 
-Open SQL Server Management Studio (SSMS) and connect to your SQL Server instance.
+Open SQL Server Management Studio (SSMS) and connect to your instance, e.g. `localhost\SQLEXPRESS`.
 
-Example:
-
-```
-localhost\SQLEXPRESS
-```
-
-### Step 3 — Create the Database
-
-Create:
+**3. Create the database**
 
 ```
 PortfolioProject_MarketingAnalytics
 ```
 
-### Step 4 — Import Source Data
+**4. Import source data**
 
-Import the raw CSV files into SQL Server.
+Import the raw CSVs into SQL Server: `customer_reviews`, `customers`, `products`, `customer_journey`, `engagement_data`, `geography`.
 
-Main tables:
+**5. Create fact & dimension tables**
 
-- customer_reviews
-- customers
-- products
-- customer_journey
-- engagement_data
-- geography
-
-### Step 5 — Create Fact & Dimension Tables
-
-Execute the SQL scripts inside `sql/`.
-
-Create the required:
+Run the scripts in `sql/` to build:
 
 ```text
-Dimension Tables
-        ↓
-Fact Tables
-        ↓
-Sentiment Fact Table
+Dimension Tables → Fact Tables → Sentiment Fact Table
 ```
 
-### Step 6 — Install Python Dependencies
+**6. Install Python dependencies**
 
 ```bash
 pip install pandas nltk pyodbc sqlalchemy
 ```
 
-### Step 7 — Download VADER Lexicon
+**7. Download the VADER lexicon**
 
 ```python
 import nltk
-
 nltk.download('vader_lexicon')
 ```
 
-### Step 8 — Configure Database Connection
+**8. Configure the database connection**
 
-Open `python/customer_reviews_enrichment.py` and update the SQL Server connection details according to your local environment.
+Update the connection details in `python/customer_reviews_enrichment.py` for your local environment. **Never commit passwords or credentials to GitHub.**
 
-> Do not commit passwords or sensitive credentials to GitHub.
-
-### Step 9 — Run Sentiment Analysis
-
-From the project root:
+**9. Run sentiment analysis**
 
 ```bash
 python python/customer_reviews_enrichment.py
 ```
 
-The script:
+This connects to SQL Server, extracts reviews, loads them into Pandas, applies VADER sentiment analysis, classifies sentiment, and writes the enriched data back to SQL Server.
 
-- Connects to SQL Server
-- Extracts customer reviews
-- Loads them into Pandas
-- Applies VADER sentiment analysis
-- Creates sentiment classifications
-- Generates enriched review data
-- Writes the enriched information back to the analytical layer
+**10. Run SQL analytics**
 
-### Step 10 — Run SQL Analytics
+Execute the scripts in `sql/` for KPI, customer, product, rating, sentiment, and window-function analysis, and Power BI data preparation.
 
-Execute the SQL files inside `sql/`.
+**11. Open Power BI**
 
-These scripts perform:
+Open `powerbi/Customer_Sentiment_Analytics_Dashboard.pbix`, refresh the dataset, and explore via slicers and filters.
 
-- KPI analysis
-- Customer analysis
-- Product analysis
-- Rating analysis
-- Sentiment analysis
-- Advanced SQL analysis
-- Window-function analysis
-- Power BI data preparation
-
-### Step 11 — Open Power BI
-
-Open `powerbi/Customer_Sentiment_Analytics_Dashboard.pbix`.
-
-Refresh the dataset and interact with the dashboard using slicers, filters, and visualizations.
+> **Note:** The SQL Server database itself is not stored in GitHub. This repo contains the CSV/data files, SQL scripts, Python pipeline, and Power BI dashboard — the database must be created and configured locally before running the full pipeline.
 
 ---
 
-# 📌 Important Note About Database Connectivity
+## 🔐 Security
 
-The SQL Server database itself is not stored inside GitHub.
-
-The repository contains:
-
-```text
-CSV/Data files
-+
-SQL scripts
-+
-Python pipeline
-+
-Power BI dashboard
-```
-
-The user needs to create/configure the SQL Server database locally before running the complete pipeline.
-
----
-
-# 🧪 Validation Performed
-
-The project includes validation of:
-
-- Duplicate records
-- Customer relationships
-- Product relationships
-- Review records
-- Data types
-- Missing/invalid values
-- Sentiment output
-- Analytical table structure
-
-This helps ensure that downstream analysis is based on reliable data.
-
----
-
-# 🔐 Security
-
-Database credentials and local connection details should not be committed to GitHub.
-
-Sensitive information should be stored locally or through environment variables.
-
-Example:
+Database credentials and local connection details should **never** be committed to GitHub. Store sensitive information locally or via environment variables, e.g.:
 
 ```
 DB_SERVER
@@ -970,266 +572,149 @@ DB_USERNAME
 DB_PASSWORD
 ```
 
-A `.gitignore` file should be used to prevent accidental upload of sensitive files.
+A `.gitignore` file prevents accidental upload of sensitive files.
 
 ---
 
-# 📚 Key SQL Concepts Demonstrated
+## 🧪 Validation Performed
 
-SELECT, WHERE, GROUP BY, ORDER BY, JOIN, LEFT JOIN, CASE, NULLIF, COUNT, COUNT DISTINCT, SUM, AVG, CTE, RANK, DENSE_RANK, ROW_NUMBER, PERCENT_RANK, SUM() OVER(), SQL VIEW, Conditional Aggregation
-
-# 📚 Key Python Concepts Demonstrated
-
-Python, Pandas, DataFrame, PyODBC, SQL Server Connectivity, NLTK, VADER, Text Processing, Sentiment Classification, CSV Processing, Data Enrichment, ETL Pipeline
-
-# 📚 Key Power BI Concepts Demonstrated
-
-Data Import, Data Modeling, Relationships, KPIs, Cards, Charts, Slicers, Filters, Drill-down Analysis, DAX Measures, Interactive Dashboard
+Duplicate records · customer relationships · product relationships · review records · data types · missing/invalid values · sentiment output · analytical table structure.
 
 ---
 
-# 📈 Analytics Architecture
+## 📚 Key Concepts Demonstrated
 
-The project can be viewed as four major layers:
+<table>
+<tr><td valign="top" width="33%">
+
+**SQL**
+- SELECT / WHERE / GROUP BY / ORDER BY
+- JOIN, LEFT JOIN, CASE, NULLIF
+- COUNT, COUNT DISTINCT, SUM, AVG
+- CTEs
+- RANK, DENSE_RANK, ROW_NUMBER, PERCENT_RANK
+- SUM() OVER(), SQL Views
+- Conditional Aggregation
+
+</td><td valign="top" width="33%">
+
+**Python**
+- Pandas DataFrames
+- PyODBC / SQL Server connectivity
+- NLTK & VADER
+- Text processing
+- Sentiment classification
+- CSV processing & data enrichment
+- ETL pipeline design
+
+</td><td valign="top" width="34%">
+
+**Power BI**
+- Data import & modeling
+- Relationships
+- KPIs & Cards
+- Charts & Slicers/Filters
+- Drill-down analysis
+- DAX measures
+- Interactive dashboarding
+
+</td></tr>
+</table>
+
+---
+
+## 📈 Analytics Architecture
 
 ```text
 ┌──────────────────────────────┐
-│       SOURCE DATA            │
-│ CSV Customer & Product Data  │
+│        SOURCE DATA           │
+│  CSV Customer & Product Data │
 └──────────────┬───────────────┘
                ↓
 ┌──────────────────────────────┐
-│       SQL SERVER             │
-│ Cleaning + Fact/Dimensions   │
+│         SQL SERVER           │
+│  Cleaning + Fact/Dimensions  │
 └──────────────┬───────────────┘
                ↓
 ┌──────────────────────────────┐
-│       PYTHON NLP             │
-│ Pandas + NLTK VADER          │
-│ Sentiment Enrichment         │
+│         PYTHON NLP           │
+│  Pandas + NLTK VADER         │
+│  Sentiment Enrichment        │
 └──────────────┬───────────────┘
                ↓
 ┌──────────────────────────────┐
-│       ANALYTICS              │
-│ Advanced SQL + SQL Views     │
+│         ANALYTICS            │
+│  Advanced SQL + SQL Views    │
 └──────────────┬───────────────┘
                ↓
 ┌──────────────────────────────┐
-│       POWER BI                │
-│ DAX + KPIs + Dashboard       │
+│         POWER BI             │
+│  DAX + KPIs + Dashboard      │
 └──────────────────────────────┘
 ```
 
 ---
 
-# 🎓 What I Learned
+## 🎓 What I Learned
 
-This project provided practical experience in building an end-to-end analytics solution.
+**SQL** — designing relational data models, building fact/dimension tables, writing complex analytical queries, joins and conditional aggregation, CTEs, window functions, analytical views, and preparing data for Power BI.
 
-### SQL
+**Python** — connecting to SQL Server via PyODBC, manipulating data with Pandas, building an automated enrichment workflow, and integrating NLP into an analytics pipeline.
 
-I learned how to:
-- Design relational data models
-- Create fact and dimension tables
-- Write complex analytical queries
-- Use joins and conditional aggregation
-- Work with CTEs
-- Use SQL window functions
-- Create analytical views
-- Prepare data for Power BI
+**NLP** — processing review text, applying VADER sentiment analysis, generating sentiment scores, classifying feedback, and combining textual sentiment with numerical ratings.
 
-### Python
+**Power BI** — building analytical data models, creating KPIs, writing DAX, and designing interactive dashboards.
 
-I learned how to:
-- Connect Python to SQL Server
-- Extract database data using PyODBC
-- Manipulate data using Pandas
-- Build an automated enrichment workflow
-- Integrate NLP into an analytics pipeline
-
-### NLP
-
-I learned how to:
-- Process customer review text
-- Apply VADER sentiment analysis
-- Generate sentiment scores
-- Classify customer feedback
-- Combine textual sentiment with numerical ratings
-
-### Power BI
-
-I learned how to:
-- Build analytical data models
-- Create KPIs
-- Use DAX
-- Build interactive dashboards
-- Present analytical findings visually
-
-### Business Analytics
-
-Most importantly, I learned how to move from:
+**Business Analytics** — most importantly, how to move an idea all the way from raw data to a business decision:
 
 ```text
-Raw Data
-    ↓
-Cleaning
-    ↓
-Data Modeling
-    ↓
-Transformation
-    ↓
-Analysis
-    ↓
-Visualization
-    ↓
-Business Insights
+Raw Data → Cleaning → Data Modeling → Transformation → Analysis → Visualization → Business Insights
 ```
 
-This helped me understand how different analytics tools work together rather than treating SQL, Python, and Power BI as separate technologies.
+This project reinforced how SQL, Python, and Power BI work together as one connected pipeline rather than three separate tools.
 
 ---
 
-# ⭐ Key Project Highlights
+## ⭐ Key Project Highlights
 
-✔ End-to-End Customer Analytics Pipeline
-✔ SQL Server Database
-✔ Fact & Dimension Data Modeling
-✔ Data Cleaning & Validation
-✔ Python + SQL Server Integration
-✔ Pandas Data Processing
-✔ NLTK VADER Sentiment Analysis
-✔ Customer Review Enrichment
-✔ Sentiment Fact Table
-✔ Advanced SQL Queries
-✔ CTEs
-✔ Conditional Aggregation
-✔ Window Functions
-✔ RANK()
-✔ DENSE_RANK()
-✔ ROW_NUMBER()
-✔ PERCENT_RANK()
-✔ Cumulative Analysis
-✔ SQL Views
-✔ Power BI-Ready Analytical Layer
-✔ DAX KPIs
-✔ Interactive Power BI Dashboard
-✔ Rating vs Sentiment Analysis
-✔ Customer-Level Analysis
-✔ Product-Level Analysis
-✔ Business-Focused Analytics
+✔ End-to-end customer analytics pipeline · ✔ SQL Server database · ✔ Fact & dimension data modeling · ✔ Data cleaning & validation · ✔ Python + SQL Server integration · ✔ NLTK VADER sentiment analysis · ✔ Sentiment fact table · ✔ Advanced SQL (CTEs, window functions, conditional aggregation) · ✔ Power BI-ready analytical layer · ✔ DAX KPIs · ✔ Interactive Power BI dashboard · ✔ Rating vs sentiment analysis · ✔ Customer- and product-level analysis · ✔ Business-focused analytics
 
 ---
 
-# 🔮 Future Improvements
+## 🔮 Future Improvements
 
-Possible future improvements include:
-
-- Transformer-based sentiment analysis
-- BERT-based NLP models
-- Aspect-based sentiment analysis
-- Topic modeling
-- Customer segmentation
-- Customer churn prediction
-- Sentiment forecasting
-- Automated ETL pipelines
-- Scheduled data refresh
+- Transformer-based / BERT-based sentiment analysis
+- Aspect-based sentiment analysis & topic modeling
+- Customer churn prediction & sentiment forecasting
+- Automated, scheduled ETL pipelines
 - Real-time sentiment monitoring
-- Cloud database deployment
-- Automated Power BI refresh
+- Cloud database deployment & automated Power BI refresh
 - Advanced customer experience analytics
 
 ---
 
-# 📌 Conclusion
+## 📌 Conclusion
 
-Customer Sentiment Analytics demonstrates an end-to-end approach to transforming raw customer data into actionable business insights.
+**Customer Sentiment Analytics** demonstrates a complete, end-to-end approach to turning raw customer data into actionable business insight — combining SQL Server, Python, Pandas, NLTK VADER, advanced SQL, Power BI, and DAX into one connected pipeline.
 
-The project combines:
+SQL Server provides the structured data foundation and analytical layer. Python and VADER enrich customer reviews with sentiment. Advanced SQL generates customer, product, rating, and sentiment analysis. Power BI and DAX turn all of it into an interactive business dashboard.
 
-```text
-SQL Server
-+
-Python
-+
-Pandas
-+
-NLTK VADER
-+
-Advanced SQL
-+
-Power BI
-+
-DAX
-```
-
-SQL Server provides the structured data foundation and analytical layer.
-
-Python and NLTK VADER enrich customer reviews with sentiment information.
-
-Advanced SQL queries generate customer, product, rating, and sentiment analysis.
-
-Power BI and DAX transform these analytical outputs into an interactive business dashboard.
-
-The final solution demonstrates how a Data Analyst can take raw structured and unstructured customer data and convert it into a complete business intelligence and decision-support solution.
+The result shows how a Data Analyst can take raw structured and unstructured customer data and convert it into a complete business intelligence and decision-support solution — not just a single-tool demo, but a full pipeline from CSV to dashboard.
 
 ---
 
-# 👩‍💻 Author
+## 👩‍💻 Author
 
 **Pushpalata S**
+B.Tech in Chemical Engineering, Motilal Nehru National Institute of Technology Allahabad
 
-B.Tech in Chemical Engineering
-Motilal Nehru National Institute of Technology Allahabad
-
-GitHub: [https://github.com/Pushpalata-S](https://github.com/Pushpalata-S)
+[![GitHub](https://img.shields.io/badge/GitHub-Pushpalata--S-181717?style=flat&logo=github)](https://github.com/Pushpalata-S)
 
 ---
 
-# ⭐ Repository
+<div align="center">
 
-Project Repository: [https://github.com/Pushpalata-S/Customer-Sentiment-Analytics](https://github.com/Pushpalata-S/Customer-Sentiment-Analytics)
+⭐ **[View the full repository](https://github.com/Pushpalata-S/Customer-Sentiment-Analytics)** — explore the SQL scripts, Python sentiment pipeline, data model, and Power BI dashboard.
 
-If you find this project useful, feel free to explore the SQL scripts, Python sentiment pipeline, data model, and Power BI dashboard.
-
----
-
-# 📝 Project Update Note
-
-This README reflects the **current, upgraded version** of the project. The previous version of the README described only a **SQL Server + Python** workflow. The project has since evolved, and this README now correctly documents the full pipeline:
-
-```text
-SQL Server → Fact/Dimension Model → Python/VADER → Sentiment Fact →
-Advanced SQL → Power BI View → DAX → Dashboard
-```
-
-**Note on repository structure:** the file tree in the [Project Structure](#-project-structure) section should match what's actually present in the GitHub repository — rename files on either side if they've drifted, rather than assuming every listed file exists.
-
-For the strongest presentation, the repository should ultimately be organized as:
-
-```text
-Customer-Sentiment-Analytics
-│
-├── data
-│   ├── raw
-│   └── processed
-│
-├── sql
-│   ├── fact_*.sql
-│   ├── dim_*.sql
-│   ├── sentiment analysis queries
-│   └── Power BI view
-│
-├── python
-│   └── customer_reviews_enrichment.py
-│
-├── powerbi
-│   └── Customer_Sentiment_Analytics_Dashboard.pbix
-│
-├── images
-├── README.md
-└── .gitignore
-```
-
-This version is stronger for a Data Analyst interview because it shows the project is not just a basic sentiment-analysis exercise — it's an end-to-end SQL + Python + NLP + Power BI analytics project.
-
+</div>
 
