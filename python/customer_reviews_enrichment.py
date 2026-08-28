@@ -1,14 +1,12 @@
 # pip install pandas nltk pyodbc sqlalchemy
-
 import pandas as pd
 import pyodbc
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
-
 # Download the VADER lexicon for sentiment analysis if not already present.
 nltk.download('vader_lexicon')
 
+#                    SQL Connection & Data Extraction
 # Define a function to fetch data from a SQL database using a SQL query
 
 
@@ -24,7 +22,7 @@ def fetch_data_from_sql():
     conn = pyodbc.connect(conn_str)
 
     # Define the SQL query to fetch customer reviews data
-    query = "SELECT ReviewID, CustomerID, ProductID, ReviewDate, Rating, ReviewText FROM dbo.customer_reviews"
+    query = "SELECT ReviewID, CustomerID, ProductID, ReviewDate, Rating, ReviewText FROM dbo.fact_customer_reviews"
 
     # Execute the query and fetch the data into a DataFrame
     df = pd.read_sql(query, conn)
@@ -39,6 +37,7 @@ def fetch_data_from_sql():
 # Fetch the customer reviews data from the SQL database
 customer_reviews_df = fetch_data_from_sql()
 
+#                         Sentiment Analysis (VADER)(The Core)
 # Initialize the VADER sentiment intensity analyzer for analyzing the sentiment of text data
 sia = SentimentIntensityAnalyzer()
 
@@ -51,6 +50,18 @@ def calculate_sentiment(review):
     # Return the compound score, which is a normalized score between -1 (most negative) and 1 (most positive)
     return sentiment['compound']
 
+
+# ADD THIS HERE #new
+def text_sentiment_label(score):
+    if score > 0.05:
+        return 'Positive'
+    elif score < -0.05:
+        return 'Negative'
+    else:
+        return 'Neutral'
+
+
+#                      categorize_sentiment()
 # Define a function to categorize sentiment using both the sentiment score and the review rating
 
 
@@ -78,9 +89,8 @@ def categorize_sentiment(score, rating):
         else:
             return 'Neutral'  # Neutral rating and neutral sentiment
 
+
 # Define a function to bucket sentiment scores into text ranges
-
-
 def sentiment_bucket(score):
     if score >= 0.5:
         return '0.5 to 1.0'  # Strongly positive sentiment
@@ -96,6 +106,13 @@ def sentiment_bucket(score):
 customer_reviews_df['SentimentScore'] = customer_reviews_df['ReviewText'].apply(
     calculate_sentiment)
 
+
+# new
+customer_reviews_df['TextSentimentLabel'] = (
+    customer_reviews_df['SentimentScore']
+    .apply(text_sentiment_label)
+)
+
 # Apply sentiment categorization using both text and rating
 customer_reviews_df['SentimentCategory'] = customer_reviews_df.apply(
     lambda row: categorize_sentiment(row['SentimentScore'], row['Rating']), axis=1)
@@ -110,3 +127,56 @@ print(customer_reviews_df.head())
 # Save the DataFrame with sentiment scores, categories, and buckets to a new CSV file
 customer_reviews_df.to_csv(
     'fact_customer_reviews_with_sentiment.csv', index=False)
+
+# =========================================================
+# UPLOAD SENTIMENT RESULTS TO SQL SERVER
+# =========================================================
+
+sentiment_df = customer_reviews_df[
+    [
+        'ReviewID',
+        'SentimentScore',
+        'TextSentimentLabel',
+        'SentimentBucket',
+        'SentimentCategory'
+    ]
+].copy()
+
+conn_str = (
+    "Driver={SQL Server};"
+    "Server=DESKTOP-A0TGUPF\\SQLEXPRESS;"
+    "Database=PortfolioProject_MarketingAnalytics;"
+    "Trusted_Connection=yes;"
+)
+
+conn = pyodbc.connect(conn_str)
+cursor = conn.cursor()
+
+insert_query = """
+INSERT INTO dbo.fact_review_sentiment
+(
+    ReviewID,
+    SentimentScore,
+    TextSentimentLabel,
+    SentimentBucket,
+    SentimentCategory
+)
+VALUES (?, ?, ?, ?, ?)
+"""
+
+for _, row in sentiment_df.iterrows():
+    cursor.execute(
+        insert_query,
+        int(row['ReviewID']),
+        float(row['SentimentScore']),
+        row['TextSentimentLabel'],
+        row['SentimentBucket'],
+        row['SentimentCategory']
+    )
+
+conn.commit()
+
+cursor.close()
+conn.close()
+
+print("Sentiment data successfully uploaded to SQL Server.")
